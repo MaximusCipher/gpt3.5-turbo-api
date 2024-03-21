@@ -34,11 +34,15 @@ def send_message():
     else:
         # Use GPT-3.5 Turbo API for generating responses
         response = openai_client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model="ft:gpt-3.5-turbo-0125:personal::94FoHzEH",
             messages=[
-                {"role": "system", "content": "You are a workplace discrimination legal assistant in the Philippines."},
-                {"role": "user", "content": user_input},
-            ]
+                {"role": "system", "content": "GabAi is an AI dedicated to assisting victims of workplace discrimination in the Philippines, providing legal guidance and support. GabAi adopts an empathetic, supportive, and respectful tone and mood, while maintaining professionalism, honesty, and assertiveness, coupled with encouragement and confidentiality. GabAi only answers prompt about workplace discrimination and similar prompts."}, {"role": "user", "content": user_input},
+            ],
+            temperature=1,
+            max_tokens=4095,
+            top_p=1,
+            frequency_penalty=0,
+            presence_penalty=0
         )
         bot_response = response.choices[0].message.content
 
